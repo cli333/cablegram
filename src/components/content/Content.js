@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./styles.css";
 import Column from "../column/Column";
 
-import seed from "../../utils/seed";
+import { context } from "../../context/Provider";
+
+import { filterGrams } from "../../utils/utils";
 
 const Content = () => {
-  return (
-    <div className="content">
-      Content
-      {seed.map((item, idx) => (
-        <Column {...item} key={`${item.author} ${idx}`} />
-      ))}
-    </div>
-  );
+  const { grams, searchFilter } = useContext(context);
+
+  const displayGrams = () => {
+    return grams
+      .filter(filterGrams(searchFilter))
+      .map((item, idx) => <Column {...item} key={`${item.author} ${idx}`} />);
+  };
+
+  return <div className="content">{displayGrams()}</div>;
 };
 
 export default Content;

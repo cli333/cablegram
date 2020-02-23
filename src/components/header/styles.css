@@ -13,10 +13,6 @@ header {
   margin-bottom: 20px;
 }
 
-header:hover {
-  color: #3f250b;
-}
-
 @media only all and (max-width: 600px) {
   header {
     max-width: 320px;
@@ -52,4 +48,56 @@ header:hover {
   line-height: 20px;
   display: inline-block;
   margin: 0 50px 20px -360px;
+}
+
+.form-wrapper {
+  position: relative;
+}
+
+.form {
+  position: absolute;
+  border: 3px double #2f2f2f;
+  padding: 10px 15px 10px 15px;
+  line-height: 20px;
+  display: inline-block;
+  margin: 0 50px 20px -360px;
+  width: 200px;
+  height: 100px;
+  z-index: 10;
+  background: #f9f7f1;
+  top: 20px;
+  left: 270px;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.form-wrapper input {
+  margin: 0.6em auto;
+  border: none;
+  background-color: #f9f7f1;
+  outline: none;
+  border-bottom: 1px solid #2f2f2f;
+}
+
+input {
+  background-color: #f9f7f1;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #2f2f2f;
+}
+
+input::placeholder {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  header {
+    max-width: 420px;
+    font-size: 60px;
+    line-height: 54px;
+    overflow: hidden;
+  }
 }

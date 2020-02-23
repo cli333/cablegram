@@ -63,3 +63,27 @@
   display: block;
   margin: 0 auto;
 }
+
+p {
+  text-align: left;
+}
+
+@media only all and (max-width: 1200px) {
+  .column {
+    width: 31%;
+  }
+}
+@media only all and (max-width: 900px) {
+  .column {
+    width: 47%;
+  }
+}
+@media only all and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+  .column + .column {
+    border-left: none;
+    border-bottom: 1px solid #2f2f2f;
+  }
+}
