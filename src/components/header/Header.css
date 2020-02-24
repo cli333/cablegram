@@ -69,6 +69,21 @@ header {
   left: 270px;
 }
 
+.form-register {
+  position: absolute;
+  border: 3px double #2f2f2f;
+  padding: 10px 15px 10px 15px;
+  line-height: 20px;
+  display: inline-block;
+  margin: 0 50px 20px -360px;
+  width: 200px;
+  height: 135px;
+  z-index: 10;
+  background: #f9f7f1;
+  top: 20px;
+  left: 270px;
+}
+
 a {
   color: inherit;
   text-decoration: underline;

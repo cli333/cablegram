@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "./styles.css";
+import "./Content.css";
 import Column from "../column/Column";
 
 import { context } from "../../context/Provider";

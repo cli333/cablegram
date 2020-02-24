@@ -24,3 +24,6 @@ yarn-error.log*
 
 /src/utils
 /src/firebase
+/firebase
+/server/firebase
+/server/node_modules

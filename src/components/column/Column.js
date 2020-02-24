@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.css";
+import "./Column.css";
 
 import { splitParagraph } from "../../utils/utils";
 

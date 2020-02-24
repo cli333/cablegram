@@ -1,20 +1,21 @@
 import React, { useState, useContext } from "react";
-import "./styles.css";
+import "./Header.css";
 import Register from "../register/Register";
 
 import { context } from "../../context/Provider";
 
 import { checkTime } from "../../utils/utils";
 import SignIn from "../signin/SignIn";
+import SignOut from "../signout/SignOut";
 
 const Header = () => {
-  const { searchFilter, setSearchFilter } = useContext(context);
+  const { searchFilter, setSearchFilter, user } = useContext(context);
   const [registerVisible, setRegisterVisible] = useState(false);
   const [signInVisible, setSignInVisible] = useState(false);
   return (
     <div className="head">
-      <div class="head-head">
-        <div class="left-box">
+      <div className="head-head">
+        <div className="left-box">
           <span style={{ fontStyle: "italic" }}>USER NAME HERE</span>
           <br />
           <span>POSTS</span>
@@ -27,10 +28,15 @@ const Header = () => {
         <header className="header">CableGram Press</header>
       </div>
 
-      <div class="subhead">
+      <div className="subhead">
         <div className="form-wrapper">
           {/* set conditional signin singOut here*/}
-          <a onClick={() => setSignInVisible(!signInVisible)}>Sign In</a>
+          {/* build sign out component*/}
+          {!user && (
+            <a onClick={() => setSignInVisible(!signInVisible)}>Sign In</a>
+          )}
+          {user && <SignOut />}
+
           <SignIn signInVisible={signInVisible} />
         </div>
         <div>
