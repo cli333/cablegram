@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import "./Header.css";
 import Register from "../register/Register";
 
@@ -21,36 +21,14 @@ const Header = () => {
     setIsModalShown
   } = useContext(context);
 
-  const displayFollowers = () => {
-    const { followers } = authUser;
-    return `${followers.length} follower${
-      followers.length > 1 || followers.length === 0 ? "s" : ""
-    }`;
-  };
-
-  const displayFollowing = () => {
-    const { following } = authUser;
-    return `${following.length} following`;
-  };
-
   return (
     <div className="head">
       <div className="head-head">
-        <div className="left-box">
-          <span style={{ fontStyle: "italic" }}>
-            {authUser && authUser.author}
-          </span>
-          <br />
-          <span>{authUser && displayFollowers()}</span>
-          <br />
-          <span>{authUser && displayFollowing()}</span>
-        </div>
-
         <header className="header">CableGram Press</header>
       </div>
 
       <div className="subhead">
-        <div className="form-wrapper">
+        <div className="form-wrapper left">
           {!authUser && (
             <a onClick={() => setIsSignInVisible(!isSignInVisible)}>Sign In</a>
           )}
@@ -66,10 +44,10 @@ const Header = () => {
             onChange={e => setSearchFilter(e.target.value)}
             value={searchFilter}
           />{" "}
-          | {checkTime()}
+          <span className="header-time">| {checkTime()}</span>
         </div>
         {!authUser ? (
-          <div className="form-wrapper">
+          <div className="form-wrapper right">
             <a onClick={() => setIsRegisterVisible(!isRegisterVisible)}>
               Register
             </a>

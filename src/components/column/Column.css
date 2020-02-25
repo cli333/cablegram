@@ -8,6 +8,7 @@
   filter: sepia(80%) grayscale(1) contrast(1) opacity(0.8);
   mix-blend-mode: multiply;
   width: 100%;
+  cursor: pointer;
 }
 
 .column {

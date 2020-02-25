@@ -25,7 +25,7 @@ const Send = () => {
           authorId: authUser.authorId,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           headline,
-          likes: 0,
+          comments: [],
           pictureCaption,
           pictureURL,
           text
@@ -42,7 +42,7 @@ const Send = () => {
   };
 
   return (
-    <div className={displayClassName}>
+    <div className={displayClassName} onClick={() => setIsModalShown(false)}>
       <section className="modal-main">
         <form onSubmit={e => handleSubmit(e)}>
           <input

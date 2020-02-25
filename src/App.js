@@ -8,8 +8,10 @@ import Content from "./components/content/Content";
 function App() {
   return (
     <Provider>
-      <Header />
-      <Content />
+      <div>
+        <Header />
+        <Content />
+      </div>
     </Provider>
   );
 }

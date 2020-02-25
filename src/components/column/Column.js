@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Column.css";
+import { context } from "../../context/Provider";
 
-const Column = ({ headline, author, pictureURL, pictureCaption, text }) => {
+const Column = props => {
+  const { headline, author, pictureURL, pictureCaption, text } = props;
+  const { setIsGramModalShown, setSelectedGram } = useContext(context);
+
+  const handleClick = () => {
+    setIsGramModalShown(true);
+    setSelectedGram({ ...props });
+  };
   return (
     <div className="column">
       <div className="head">
@@ -11,7 +19,12 @@ const Column = ({ headline, author, pictureURL, pictureCaption, text }) => {
         </p>
 
         <figure className="figure">
-          <img className="media" src={pictureURL} alt={pictureCaption} />
+          <img
+            className="media"
+            src={pictureURL}
+            alt={pictureCaption}
+            onClick={() => handleClick()}
+          />
           {pictureCaption && pictureCaption.length && (
             <figcaption className="figcaption">{pictureCaption}</figcaption>
           )}

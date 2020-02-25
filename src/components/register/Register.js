@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Register.css";
 import firebase from "../../firebase/firebase";
 
 const Register = ({ registerVisible }) => {

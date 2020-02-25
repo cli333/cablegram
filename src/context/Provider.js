@@ -10,6 +10,8 @@ const Provider = ({ children }) => {
   const [isSignInVisible, setIsSignInVisible] = useState(false);
   const [isRegisterVisible, setIsRegisterVisible] = useState(false);
   const [isModalShown, setIsModalShown] = useState(false);
+  const [isGramModalShown, setIsGramModalShown] = useState(false);
+  const [selectedGram, setSelectedGram] = useState(null);
 
   // subscribe to user changes
   useEffect(() => {
@@ -40,7 +42,7 @@ const Provider = ({ children }) => {
       .orderBy("createdAt", "desc")
       .get()
       .then(snapshot => {
-        let docs = snapshot.docs.map(doc => doc.data());
+        let docs = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
         setGrams(docs);
       });
   }, []);
@@ -53,7 +55,7 @@ const Provider = ({ children }) => {
       .collection("grams")
       .orderBy("createdAt", "desc")
       .onSnapshot(snapshot => {
-        let docs = snapshot.docs.map(doc => doc.data());
+        let docs = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
         setGrams(docs);
       });
     return () => unsubscribe();
@@ -73,7 +75,11 @@ const Provider = ({ children }) => {
         isRegisterVisible,
         setIsRegisterVisible,
         isModalShown,
-        setIsModalShown
+        setIsModalShown,
+        isGramModalShown,
+        setIsGramModalShown,
+        selectedGram,
+        setSelectedGram
       }}
     >
       {children}
