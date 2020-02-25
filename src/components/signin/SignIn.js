@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import firebase from "../../firebase/firebase";
+import { context } from "../../context/Provider";
 
 const SignIn = ({ signInVisible }) => {
+  const { setIsSignInVisible } = useContext(context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,6 +12,7 @@ const SignIn = ({ signInVisible }) => {
     firebase.auth().signInWithEmailAndPassword(email, password);
     setEmail("");
     setPassword("");
+    setIsSignInVisible(false);
   };
 
   return (

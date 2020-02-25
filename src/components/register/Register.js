@@ -5,29 +5,33 @@ const Register = ({ registerVisible }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const userRef = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
-    await userRef.user.updateProfile({
-      displayName: name
-    });
-    await firebase
-      .firestore()
-      .collection("authors")
-      .add({
-        author: userRef.user.displayName,
-        authorId: userRef.user.uid,
-        authorEmail: userRef.user.email,
-        followers: [],
-        following: []
+    try {
+      const userRef = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      await userRef.user.updateProfile({
+        displayName: name
       });
-    setName("");
-    setEmail("");
-    setPassword("");
+      await firebase
+        .firestore()
+        .collection("authors")
+        .add({
+          author: userRef.user.displayName,
+          authorId: userRef.user.uid,
+          authorEmail: userRef.user.email,
+          followers: [],
+          following: []
+        });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setName("");
+      setEmail("");
+      setPassword("");
+    }
   };
 
   return (

@@ -7,22 +7,43 @@ import { context } from "../../context/Provider";
 import { checkTime } from "../../utils/utils";
 import SignIn from "../signin/SignIn";
 import SignOut from "../signout/SignOut";
+import Send from "../send/Send";
 
 const Header = () => {
-  const { searchFilter, setSearchFilter, user } = useContext(context);
-  const [registerVisible, setRegisterVisible] = useState(false);
-  const [signInVisible, setSignInVisible] = useState(false);
+  const {
+    searchFilter,
+    setSearchFilter,
+    authUser,
+    isSignInVisible,
+    setIsSignInVisible,
+    isRegisterVisible,
+    setIsRegisterVisible,
+    setIsModalShown
+  } = useContext(context);
+
+  const displayFollowers = () => {
+    const { followers } = authUser;
+    return `${followers.length} follower${
+      followers.length > 1 || followers.length === 0 ? "s" : ""
+    }`;
+  };
+
+  const displayFollowing = () => {
+    const { following } = authUser;
+    return `${following.length} following`;
+  };
+
   return (
     <div className="head">
       <div className="head-head">
         <div className="left-box">
-          <span style={{ fontStyle: "italic" }}>USER NAME HERE</span>
+          <span style={{ fontStyle: "italic" }}>
+            {authUser && authUser.author}
+          </span>
           <br />
-          <span>POSTS</span>
+          <span>{authUser && displayFollowers()}</span>
           <br />
-          <span>FOLLOWERS</span>
-          <br />
-          <span>FOLLOWERS</span>
+          <span>{authUser && displayFollowing()}</span>
         </div>
 
         <header className="header">CableGram Press</header>
@@ -30,14 +51,12 @@ const Header = () => {
 
       <div className="subhead">
         <div className="form-wrapper">
-          {/* set conditional signin singOut here*/}
-          {/* build sign out component*/}
-          {!user && (
-            <a onClick={() => setSignInVisible(!signInVisible)}>Sign In</a>
+          {!authUser && (
+            <a onClick={() => setIsSignInVisible(!isSignInVisible)}>Sign In</a>
           )}
-          {user && <SignOut />}
+          {authUser && <SignOut />}
 
-          <SignIn signInVisible={signInVisible} />
+          <SignIn signInVisible={isSignInVisible} />
         </div>
         <div>
           <input
@@ -49,10 +68,19 @@ const Header = () => {
           />{" "}
           | {checkTime()}
         </div>
-        <div className="form-wrapper">
-          <a onClick={() => setRegisterVisible(!registerVisible)}>Register</a>
-          <Register registerVisible={registerVisible} />
-        </div>
+        {!authUser ? (
+          <div className="form-wrapper">
+            <a onClick={() => setIsRegisterVisible(!isRegisterVisible)}>
+              Register
+            </a>
+            <Register registerVisible={isRegisterVisible} />
+          </div>
+        ) : (
+          <React.Fragment>
+            <a onClick={() => setIsModalShown(true)}>Send a Gram</a>
+            <Send />
+          </React.Fragment>
+        )}
       </div>
     </div>
   );

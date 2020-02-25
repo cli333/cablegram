@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from "react";
-import axios from "axios";
 import firebase from "../firebase/firebase";
 
 export const context = createContext();
@@ -7,18 +6,14 @@ export const context = createContext();
 const Provider = ({ children }) => {
   const [grams, setGrams] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
-  const [user, setUser] = useState(null);
+  const [authUser, setAuthUser] = useState(null);
+  const [isSignInVisible, setIsSignInVisible] = useState(false);
+  const [isRegisterVisible, setIsRegisterVisible] = useState(false);
+  const [isModalShown, setIsModalShown] = useState(false);
 
-  // load initial grams ordered by date
+  // subscribe to user changes
   useEffect(() => {
-    console.log("FETCHING STARTING GRAMS");
-    axios
-      .get("http://localhost:5000/grams")
-      .then(res => console.log(setGrams(res.data)));
-  }, []);
-
-  useEffect(() => {
-    console.log("CHECKING AUTH");
+    console.log("USER STATE CHANGED");
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         firebase
@@ -26,17 +21,60 @@ const Provider = ({ children }) => {
           .collection("authors")
           .where("authorId", "==", user.uid)
           .get()
-          .then(res => setUser(res.docs[0].data()));
+          .then(querySnapshot => {
+            setAuthUser(querySnapshot.docs[0].data());
+          });
       } else {
-        setUser(null);
+        setAuthUser(null);
       }
-      unsubscribe();
     });
+    return () => unsubscribe();
+  }, []);
+
+  // load initial grams ordered by date
+  useEffect(() => {
+    console.log("FETCHING STARTING GRAMS");
+    firebase
+      .firestore()
+      .collection("grams")
+      .orderBy("createdAt", "desc")
+      .get()
+      .then(snapshot => {
+        let docs = snapshot.docs.map(doc => doc.data());
+        setGrams(docs);
+      });
+  }, []);
+
+  // subscribe to grams
+  useEffect(() => {
+    console.log("LISTENING TO GRAMS");
+    const unsubscribe = firebase
+      .firestore()
+      .collection("grams")
+      .orderBy("createdAt", "desc")
+      .onSnapshot(snapshot => {
+        let docs = snapshot.docs.map(doc => doc.data());
+        setGrams(docs);
+      });
+    return () => unsubscribe();
   }, []);
 
   return (
     <context.Provider
-      value={{ grams, setGrams, searchFilter, setSearchFilter, user, setUser }}
+      value={{
+        grams,
+        setGrams,
+        searchFilter,
+        setSearchFilter,
+        authUser,
+        setAuthUser,
+        isSignInVisible,
+        setIsSignInVisible,
+        isRegisterVisible,
+        setIsRegisterVisible,
+        isModalShown,
+        setIsModalShown
+      }}
     >
       {children}
     </context.Provider>
