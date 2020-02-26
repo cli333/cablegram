@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "./Gram.css";
 import { context } from "../../context/Provider";
+import useComponentVisible from "../../hooks/useComponentVisible";
 
 const Gram = () => {
   const {

@@ -2,9 +2,7 @@ import React, { useContext } from "react";
 import "./Content.css";
 import Column from "../column/Column";
 import Gram from "../gram/Gram";
-
 import { context } from "../../context/Provider";
-
 import { filterGrams } from "../../utils/utils";
 
 const Content = () => {
