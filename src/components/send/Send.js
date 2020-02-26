@@ -21,8 +21,8 @@ const Send = () => {
         .firestore()
         .collection("grams")
         .add({
-          author: authUser.author,
-          authorId: authUser.authorId,
+          author: authUser.displayName,
+          authorId: authUser.uid,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           headline,
           comments: [],
@@ -32,6 +32,7 @@ const Send = () => {
         });
     } catch (error) {
       console.log(error);
+      // handle errror
     } finally {
       setHeadline("");
       setPictureURL("");
@@ -42,8 +43,12 @@ const Send = () => {
   };
 
   return (
-    <div className={displayClassName} onClick={() => setIsModalShown(false)}>
-      <section className="modal-main">
+    <div
+      type="outer"
+      className={displayClassName}
+      onClick={e => console.log(typeof e.target)}
+    >
+      <section className="modal-main" onClick={e => console.log(e)}>
         <form onSubmit={e => handleSubmit(e)}>
           <input
             type="text"
@@ -70,8 +75,13 @@ const Send = () => {
             onChange={e => setText(e.target.value)}
           ></textarea>
           <div>
-            <a onClick={e => handleSubmit(e)}>Submit</a> |
-            <a onClick={() => setIsModalShown(false)}>Close</a>
+            <span className="link" onClick={e => handleSubmit(e)}>
+              Submit
+            </span>{" "}
+            |
+            <span className="link" onClick={() => setIsModalShown(false)}>
+              Close
+            </span>
           </div>
         </form>
       </section>

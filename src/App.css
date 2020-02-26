@@ -10,7 +10,7 @@ a {
   color: inherit;
 }
 
-a:hover {
+.link:hover {
   text-decoration: none;
   cursor: pointer;
 }

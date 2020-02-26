@@ -7,8 +7,6 @@ const Provider = ({ children }) => {
   const [grams, setGrams] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
   const [authUser, setAuthUser] = useState(null);
-  const [isSignInVisible, setIsSignInVisible] = useState(false);
-  const [isRegisterVisible, setIsRegisterVisible] = useState(false);
   const [isModalShown, setIsModalShown] = useState(false);
   const [isGramModalShown, setIsGramModalShown] = useState(false);
   const [selectedGram, setSelectedGram] = useState(null);
@@ -18,14 +16,7 @@ const Provider = ({ children }) => {
     console.log("USER STATE CHANGED");
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        firebase
-          .firestore()
-          .collection("authors")
-          .where("authorId", "==", user.uid)
-          .get()
-          .then(querySnapshot => {
-            setAuthUser(querySnapshot.docs[0].data());
-          });
+        setAuthUser(user);
       } else {
         setAuthUser(null);
       }
@@ -70,10 +61,6 @@ const Provider = ({ children }) => {
         setSearchFilter,
         authUser,
         setAuthUser,
-        isSignInVisible,
-        setIsSignInVisible,
-        isRegisterVisible,
-        setIsRegisterVisible,
         isModalShown,
         setIsModalShown,
         isGramModalShown,
