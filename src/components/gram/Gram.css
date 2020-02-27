@@ -87,13 +87,16 @@ div > .gram-media {
   justify-content: space-evenly;
   font-weight: 200;
   font-style: italic;
-  font-size: 36px;
+  font-size: 25px;
   box-sizing: border-box;
   padding: 10px 0 10px 0;
   position: absolute;
   top: 3%;
   right: 3%;
   width: 48%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .gram-comment-wrapper {
@@ -155,6 +158,10 @@ div > .gram-media {
     position: absolute;
     top: 2%;
     width: 95%;
+    padding: 10px 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .gram-comments {

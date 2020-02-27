@@ -10,6 +10,7 @@ const Column = props => {
     setIsGramModalShown(true);
     setSelectedGram({ ...props });
   };
+
   return (
     <div className="column">
       <div className="head">
