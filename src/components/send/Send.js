@@ -6,10 +6,10 @@ import { validateGram } from "../../utils/utils";
 
 const Send = () => {
   const { authUser, isModalShown, setIsModalShown } = useContext(context);
-  const [headline, setHeadline] = useState(null);
-  const [pictureURL, setPictureURL] = useState(null);
-  const [pictureCaption, setPictureCaption] = useState(null);
-  const [text, setText] = useState(null);
+  const [headline, setHeadline] = useState("");
+  const [pictureURL, setPictureURL] = useState("");
+  const [pictureCaption, setPictureCaption] = useState("");
+  const [text, setText] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -76,6 +76,15 @@ const Send = () => {
     }
   };
 
+  const handleClose = () => {
+    setHeadline("");
+    setPictureURL("");
+    setPictureCaption("");
+    setText("");
+    setIsModalShown(false);
+    setError(null);
+  };
+
   return (
     <div className={displayClassName}>
       <section className="modal-main">
@@ -117,7 +126,7 @@ const Send = () => {
                   Submit
                 </span>{" "}
                 |
-                <span className="link" onClick={() => setIsModalShown(false)}>
+                <span className="link" onClick={() => handleClose()}>
                   Close
                 </span>
               </React.Fragment>

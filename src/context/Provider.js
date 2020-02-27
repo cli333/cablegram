@@ -11,9 +11,7 @@ const Provider = ({ children }) => {
   const [isGramModalShown, setIsGramModalShown] = useState(false);
   const [selectedGram, setSelectedGram] = useState(null);
 
-  // subscribe to user changes
   useEffect(() => {
-    console.log("USER STATE CHANGED");
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         setAuthUser(user);
@@ -24,9 +22,7 @@ const Provider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  // load initial grams ordered by date
   useEffect(() => {
-    console.log("FETCHING STARTING GRAMS");
     firebase
       .firestore()
       .collection("grams")
@@ -38,9 +34,7 @@ const Provider = ({ children }) => {
       });
   }, []);
 
-  // subscribe to grams
   useEffect(() => {
-    console.log("LISTENING TO GRAMS");
     const unsubscribe = firebase
       .firestore()
       .collection("grams")

@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import firebase from "../../firebase/firebase";
-import { context } from "../../context/Provider";
 
 const SignIn = ({ signInVisible, setIsSignInVisible }) => {
   const [email, setEmail] = useState("");
@@ -41,7 +40,10 @@ const SignIn = ({ signInVisible, setIsSignInVisible }) => {
   };
 
   return (
-    <div className="form" style={{ display: `${signInVisible ? "" : "none"}` }}>
+    <div
+      className="form-signin"
+      style={{ display: `${signInVisible ? "" : "none"}` }}
+    >
       <form onSubmit={e => handleSubmit(e)}>
         <input
           name="email"

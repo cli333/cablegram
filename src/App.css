@@ -2,8 +2,10 @@ body {
   background-color: #f9f7f1;
   font-family: "Droid Serif", serif;
   font-size: 14px;
-  color: #2f2f2f;
+  color: #2f2f2f !important;
   background-color: #f9f7f1;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
 }
 
 a {
@@ -13,4 +15,12 @@ a {
 .link:hover {
   text-decoration: none;
   cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  display: none;
 }

@@ -20,6 +20,8 @@
   display: inline-block;
   line-height: 20px;
   position: relative;
+  transition: all 0.7s;
+  border: 3px double #2f2f2f;
 }
 
 .gram-modal-main img {
@@ -35,15 +37,157 @@
   display: none;
 }
 
-.gram-modal-main > .media {
+div > .gram-media {
   -webkit-filter: sepia(80%) contrast(1) opacity(0.8);
   filter: sepia(80%) grayscale(1) contrast(1) opacity(0.8);
   mix-blend-mode: multiply;
-  width: 100%;
-  height: 50%;
-  position: fixed;
-  top: 0;
-  left: 0;
+  width: 45%;
+  height: 45%;
+  position: absolute;
+  top: 3%;
+  left: 3%;
   overflow: hidden;
-  background-size: cover;
+  object-fit: cover;
+}
+
+.gram-comments {
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  right: 1%;
+  overflow: hidden;
+  overflow-y: scroll;
+  list-style-type: none;
+  width: 48%;
+  height: 82%;
+}
+
+.gram-input {
+  position: absolute;
+  right: 15%;
+  bottom: 1%;
+  background-color: #f9f7f1;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #2f2f2f;
+  width: 34.8%;
+}
+
+.gram-wrapper {
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  cursor: pointer;
+}
+
+.gram-headline {
+  text-transform: uppercase;
+  border-bottom: 2px solid #2f2f2f;
+  display: flex;
+  justify-content: space-evenly;
+  font-weight: 200;
+  font-style: italic;
+  font-size: 36px;
+  box-sizing: border-box;
+  padding: 10px 0 10px 0;
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  width: 48%;
+}
+
+.gram-comment-wrapper {
+  position: relative;
+  margin-top: 20px;
+}
+
+.gram-comment-right {
+  font-weight: lighter;
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+
+.gram-comment-left {
+  width: 300px;
+}
+
+.gram-text {
+  position: absolute;
+  overflow: hidden;
+  overflow-y: scroll;
+  width: 46%;
+  height: 45%;
+  bottom: 1%;
+  left: 3%;
+  margin-top: 1%;
+}
+
+@media (max-width: 600px) {
+  .gram-modal-main {
+    width: 85%;
+    border: 3px double #2f2f2f;
+  }
+
+  .gram-media {
+    display: none;
+  }
+
+  .gram-text {
+    position: absolute;
+    overflow: hidden;
+    overflow-y: scroll;
+    width: 95%;
+    height: 45%;
+    top: 50px;
+  }
+
+  .gram-headline {
+    text-transform: uppercase;
+    border-bottom: 2px solid #2f2f2f;
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: 200;
+    font-style: italic;
+    font-size: 25px;
+    box-sizing: border-box;
+    padding: 5px 0 5px 0;
+    position: absolute;
+    top: 2%;
+    width: 95%;
+  }
+
+  .gram-comments {
+    position: absolute;
+    top: 55%;
+    bottom: 10%;
+    overflow: hidden;
+    overflow-y: scroll;
+    list-style-type: none;
+    left: 3%;
+    width: 93%;
+    height: 39%;
+  }
+
+  .gram-comment-wrapper {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .gram-input {
+    position: absolute;
+    left: 3%;
+    bottom: 1%;
+    background-color: #f9f7f1;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #2f2f2f;
+    width: 66%;
+  }
+
+  .gram-wrapper {
+    right: 3%;
+  }
 }

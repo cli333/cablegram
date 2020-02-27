@@ -43,7 +43,7 @@ header {
   position: relative;
 }
 
-.form {
+.form-signin {
   position: absolute;
   border: 3px double #2f2f2f;
   padding: 10px 15px 10px 15px;
@@ -103,5 +103,13 @@ input::placeholder {
     font-size: 60px;
     line-height: 54px;
     overflow: hidden;
+  }
+
+  .form-register {
+    left: 215px;
+  }
+
+  .form-signin {
+    left: 335px;
   }
 }
